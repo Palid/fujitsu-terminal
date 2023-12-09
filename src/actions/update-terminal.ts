@@ -7,8 +7,8 @@ function buildUri(line1: string, line2: string) {
   }
   const url = new URL(uri);
 
-  url.searchParams.append("line1", line1);
-  url.searchParams.append("line2", line2);
+  url.searchParams.append("line1", line1.slice(0, 20));
+  url.searchParams.append("line2", line2.slice(0, 20));
   return url.toString();
 }
 
@@ -18,7 +18,7 @@ export async function updateTerminalFromLines(formData: FormData) {
   if (typeof line1 !== "string" || typeof line2 !== "string") {
     throw new Error("line1 and line2 must be strings");
   }
-  const uri = buildUri(line1, line2);
+  const uri = buildUri(line1.slice(0, 20), line2.slice(0, 20));
   try {
     await fetch(uri, {
       method: "POST",
