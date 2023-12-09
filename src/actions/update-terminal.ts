@@ -19,9 +19,16 @@ export async function updateTerminalFromLines(formData: FormData) {
     throw new Error("line1 and line2 must be strings");
   }
   const uri = buildUri(line1, line2);
-  return fetch(uri, {
-    method: "POST",
-  });
+  try {
+    await fetch(uri, {
+      method: "POST",
+    });
+    return {
+      success: true,
+    };
+  } catch (err) {
+    return JSON.stringify(err);
+  }
 }
 
 export async function updateTerminalFromCannedResponses(formData: FormData) {
@@ -31,7 +38,14 @@ export async function updateTerminalFromCannedResponses(formData: FormData) {
   }
   const [line1, line2] = cannedResponse.split(",");
   const uri = buildUri(line1, line2);
-  return fetch(uri, {
-    method: "POST",
-  });
+  try {
+    await fetch(uri, {
+      method: "POST",
+    });
+    return {
+      success: true,
+    };
+  } catch (err) {
+    return JSON.stringify(err);
+  }
 }
