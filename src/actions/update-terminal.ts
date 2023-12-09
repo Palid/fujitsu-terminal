@@ -32,12 +32,13 @@ export async function updateTerminalFromLines(formData: FormData) {
 }
 
 export async function updateTerminalFromCannedResponses(formData: FormData) {
-  const cannedResponse = formData.get("cannedResponse") ?? "";
+  const cannedResponse = formData.get("cannedResponses") ?? "";
   if (typeof cannedResponse !== "string") {
     throw new Error("cannedResponse must be string");
   }
   const [line1, line2] = cannedResponse.split(",");
   const uri = buildUri(line1, line2);
+
   try {
     await fetch(uri, {
       method: "POST",
