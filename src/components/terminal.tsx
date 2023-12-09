@@ -7,7 +7,10 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { updateTerminalFromLines } from "@/actions/update-terminal";
+import {
+  updateTerminalFromCannedResponses,
+  updateTerminalFromLines,
+} from "@/actions/update-terminal";
 import { PresetOptions } from "@/presets";
 import { useState } from "react";
 
@@ -58,7 +61,7 @@ export function Terminal() {
             <p>Or choose from the dropdown below</p>
             <form
               className="space-y-2"
-              action={updateTerminalFromLines}
+              action={updateTerminalFromCannedResponses}
               method="POST"
             >
               <select
